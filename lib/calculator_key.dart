@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class CalculatorKey extends ChangeNotifier {
-  var cal_text = "CASIO";
-  bool is_starting = true;
+  var calText = "CASIO";
+  bool isStarting = true;
   String evaluateExpression(String expression) {
     try {
       List<String> parts = expression
@@ -53,22 +53,22 @@ class CalculatorKey extends ChangeNotifier {
   }
 
   void giveInput(String value) {
-    print(cal_text);
+    print(calText);
     if (value == 'ac')
-      cal_text= '';
-    if (cal_text.length < 16) {
+      calText= '';
+    if (calText.length < 16) {
       if (value == "=") {
-        cal_text = evaluateExpression(cal_text);
-        is_starting = true;
+        calText = evaluateExpression(calText);
+        isStarting = true;
       }
       else if (value == 'ac')
-        cal_text= '';
+        calText= '';
       else {
-        if (is_starting == true) {
-          cal_text = '';
-          is_starting = false;
+        if (isStarting == true) {
+          calText = '';
+          isStarting = false;
         }
-        cal_text += value;
+        calText += value;
       }
     }
     notifyListeners();

@@ -24,7 +24,7 @@ class _DisplayState extends State<Display> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            context.watch<CalculatorKey>().cal_text,
+            context.watch<CalculatorKey>().calText,
             style: TextStyle(fontSize: 45),
           ),
         ),
