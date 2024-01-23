@@ -37,8 +37,6 @@ class CalculatorKey extends ChangeNotifier {
             case '/':
               result /= operand;
               break;
-            case '%':
-              result %= operand;
               break;
             default:
               return "Error";
