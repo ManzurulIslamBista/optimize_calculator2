@@ -1,76 +1,37 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:optimize_calculator/providor_calculator.dart';
+import 'package:provider/provider.dart';
 
-class CalculatorKey extends ChangeNotifier {
-  var calText = "CASIO";
-  bool isStarting = true;
-  String evaluateExpression(String expression) {
-    try {
-      List<String> parts = expression
-          .split(RegExp(r'(\+|\-|\*|\/|\%)'))
-          .where((e) => e.isNotEmpty)
-          .toList();
-      List<String> operators = expression
-          .split(RegExp(r'[0-9.]+'))
-          .where((e) => e.isNotEmpty)
-          .toList();
+class CalculatorKey extends StatefulWidget {
+  String val;
+  CalculatorKey({super.key,required this.val});
 
-      print(parts);
-      print(operators);
+  @override
+  State<CalculatorKey> createState() => _CalculatorKeyState();
+}
 
-      if (parts.length >= 2 && parts.length == operators.length + 1) {
-        double result = double.parse(parts[0]);
-
-        for (int i = 0; i < operators.length; i++) {
-          double operand = double.parse(parts[i + 1]);
-          String op = operators[i];
-
-          switch (op) {
-            case '+':
-              result += operand;
-              break;
-            case '-':
-              result -= operand;
-              break;
-            case '*':
-              result *= operand;
-              break;
-            case '/':
-              result /= operand;
-              break;
-              break;
-            default:
-              return "Error";
-          }
-        }
-
-        return result.toString();
-      } else {
-        return "Error";
-      }
-    } catch (e) {
-      return "Error";
-    }
-  }
-
-  void giveInput(String value) {
-    print(calText);
-    if (value == 'ac')
-      calText= '';
-    if (calText.length < 16) {
-      if (value == "=") {
-        calText = evaluateExpression(calText);
-        isStarting = true;
-      }
-      else if (value == 'ac')
-        calText= '';
-      else {
-        if (isStarting == true) {
-          calText = '';
-          isStarting = false;
-        }
-        calText += value;
-      }
-    }
-    notifyListeners();
+class _CalculatorKeyState extends State<CalculatorKey> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<ProvidorCalculator>().giveInput(widget.val);
+      },
+      child: Container(
+        height: 70,
+        width: MediaQuery.of(context).size.width / 4,
+        decoration: BoxDecoration(
+          color: Colors.cyan,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Center(
+          child: Text(
+            widget.val,
+            style: TextStyle(fontSize: 45),
+          ),
+        ),
+      ),
+    );
   }
 }

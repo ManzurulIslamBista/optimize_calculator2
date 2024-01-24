@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:optimize_calculator/calculator_key.dart';
+import 'package:optimize_calculator/providor_calculator.dart';
 import 'package:provider/provider.dart';
 
 class Display extends StatefulWidget {
@@ -13,6 +13,7 @@ class Display extends StatefulWidget {
 class _DisplayState extends State<Display> {
   @override
   Widget build(BuildContext context) {
+    print("Test Display");
     return Container(
 
       margin: EdgeInsets.all(20),
@@ -24,7 +25,7 @@ class _DisplayState extends State<Display> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            context.watch<CalculatorKey>().calText,
+            context.watch<ProvidorCalculator>().calText,
             style: TextStyle(fontSize: 45),
           ),
         ),
