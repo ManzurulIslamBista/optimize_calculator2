@@ -54,14 +54,14 @@ class ProvidorCalculator extends ChangeNotifier {
 
   void giveInput(String value) {
    // print(calText);
-    if (value == 'ac')
+    if (value == 'AC')
       calText= '';
     if (calText.length < 16) {
       if (value == "=") {
         calText = evaluateExpression(calText);
         isStarting = true;
       }
-      else if (value == 'ac')
+      else if (value == 'AC')
         calText= '';
       else {
         if (isStarting == true) {
